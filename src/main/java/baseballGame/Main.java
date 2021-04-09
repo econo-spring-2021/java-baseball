@@ -30,6 +30,11 @@ public class Main {
         return false;
     }
 
+    public static boolean returnIsPlayerWin (BallAvailbilty ballAvailbilty) {
+        if (ballAvailbilty.getStrikeCnt() == 3) return true;
+        else return false;
+    }
+
     public static void printResult(BallAvailbilty ballAvailbilty) {
         if (ballAvailbilty.getStrikeCnt() == 3) {
             System.out.println("3 스트라이크 아웃");
@@ -92,10 +97,10 @@ public class Main {
 
             printResult(ballAvailbilty);
 
-//            System.out.println("" + computerBall.get(0) + computerBall.get(1) + computerBall.get(2));
-//            System.out.println(ballAvailbilty.getIsBob());
-//            System.out.println(ballAvailbilty.getStrikeCnt());
-//            System.out.println(ballAvailbilty.getStrikeCnt());
+            System.out.println("" + computerBall.get(0) + computerBall.get(1) + computerBall.get(2));
+            System.out.println(ballAvailbilty.getIsBob());
+            System.out.println(ballAvailbilty.getStrikeCnt());
+            System.out.println(ballAvailbilty.getBallCnt());
         }
     }
 
