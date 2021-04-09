@@ -97,11 +97,19 @@ public class Main {
 
             printResult(ballAvailbilty);
 
+            if (returnIsPlayerWin(ballAvailbilty)) {
+                System.out.println("3개의 숫자를 모두 맞히셨습니다! 당신의 승리입니다.");
+                return;
+            }
+
             System.out.println("" + computerBall.get(0) + computerBall.get(1) + computerBall.get(2));
             System.out.println(ballAvailbilty.getIsBob());
             System.out.println(ballAvailbilty.getStrikeCnt());
             System.out.println(ballAvailbilty.getBallCnt());
         }
+
+        System.out.println("9번의 시도 동안 맞히지 못했습니다! 당신의 패배입니다.");
+        return;
     }
 
     public static void main(String[] args) {
