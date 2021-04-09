@@ -1,6 +1,6 @@
 package baseballGame;
 
-import java.util.Scanner;
+import java.util.*;
 
 class BallAvailbilty {
     private boolean isBoB;
@@ -26,26 +26,60 @@ class BallAvailbilty {
 
 public class Main {
 
-    public static boolean askWillRetry(int[] ball) {
+    public static boolean askWillRetry() {
         return false;
     }
 
-    public static BallAvailbilty returnBallAvailability() {
+    public static BallAvailbilty returnBallAvailability(ArrayList<Integer>  computerBall, ArrayList<Integer>  playerBall) {
+        int strikeCnt = 0, ballCnt = 0;
 
+        ArrayList<Integer> nonStrikeComputerBall = new ArrayList<>();
+        ArrayList<Integer> nonStrikePlayerBall = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            if (computerBall.get(i) == playerBall.get(i)) strikeCnt++;
+            else {
+                nonStrikeComputerBall.add(computerBall.get(i));
+                nonStrikePlayerBall.add(playerBall.get(i));
+            }
+        }
+
+        Collections.sort(nonStrikeComputerBall);
+        Collections.sort(nonStrikePlayerBall);
+        for (int i = 0; i < nonStrikeComputerBall.size(); i++) {
+            if (nonStrikeComputerBall.get(i) == nonStrikePlayerBall.get(i)) ballCnt++;
+        }
+
+        if (strikeCnt == 0 && ballCnt == 0) return new BallAvailbilty(true);
+        else return new BallAvailbilty(strikeCnt, ballCnt);
+    }
+
+    public static ArrayList<Integer> generateComputerBall() {
+        ArrayList<Integer> ball = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            ball.add((int)(Math.random() * 10));
+        }
+
+        return ball;
     }
 
     public static void playGame() {
         Scanner console = new Scanner(System.in);
+        ArrayList<Integer> computerBall = generateComputerBall();
+
         for (int cnt = 0; cnt < 9; cnt++) {
             System.out.print("숫자를 입력해주세요 : ");
             int input = console.nextInt();
-            int[] ball = new int[3];
+            ArrayList<Integer> playerBall = new ArrayList<>();
             for (int i = 0; i < 3; i++) {
-                ball[i] = input % 10;
+                playerBall.add(0, input % 10);
                 input /= 10;
             }
 
-            BallAvailbilty ballAvailbilty = returnBallAvailability(ball);
+            BallAvailbilty ballAvailbilty = returnBallAvailability(computerBall, playerBall);
+//            System.out.println("" + computerBall.get(0) + computerBall.get(1) + computerBall.get(2));
+//            System.out.println(ballAvailbilty.getIsBob());
+//            System.out.println(ballAvailbilty.getStrikeCnt());
+//            System.out.println(ballAvailbilty.getStrikeCnt());
         }
     }
 
