@@ -2,10 +2,36 @@ package baseballGame;
 
 import java.util.Scanner;
 
+class BallAvailbilty {
+    private boolean isBoB;
+    private int strikeCnt;
+    private int ballCnt;
+
+    public BallAvailbilty(boolean isBob) {
+        this.isBoB = isBob;
+        this.strikeCnt = 0;
+        this.ballCnt = 0;
+    }
+
+    public BallAvailbilty(int strikeCnt, int ballCnt) {
+        this.isBoB = false;
+        this.strikeCnt = strikeCnt;
+        this.ballCnt = ballCnt;
+    }
+
+    public boolean getIsBob() { return isBoB; }
+    public int getStrikeCnt() { return  strikeCnt; }
+    public int getBallCnt() { return ballCnt; }
+}
+
 public class Main {
 
-    public static boolean askWillRetry() {
+    public static boolean askWillRetry(int[] ball) {
         return false;
+    }
+
+    public static BallAvailbilty returnBallAvailability() {
+
     }
 
     public static void playGame() {
@@ -19,9 +45,7 @@ public class Main {
                 input /= 10;
             }
 
-            // checkBallAvailbility() with result Class
-
-            // returnIsPlayerWin()
+            BallAvailbilty ballAvailbilty = returnBallAvailability(ball);
         }
     }
 

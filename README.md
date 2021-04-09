@@ -5,7 +5,9 @@
 * [x] Main 함수 구체화 - 반복 제어 코드 작성, 필요한 함수 선언
 * [ ] 야구 게임 함수 ``playGame()`` 구현
     * [x] 기본 입력 및 출력
-    * [ ] 공 판정 함수 ``checkBallAvailability()`` 구현 
+    * [ ] 공 판정 함수 ``returnBallAvailability()`` 구현
+      * [x] BallAvailibilty DO 생성
+      * [ ] 정답 생성 및 유효성 판단
     * [ ] 결과 출력 함수 ``printResult()`` 구현
     * [ ] 결과 출력 함수 ``returnIsPlayerWin()`` 구현
     * [ ] 탈출 조건 
