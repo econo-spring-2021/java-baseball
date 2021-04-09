@@ -11,5 +11,5 @@
     * [x] 결과 출력 함수 ``printResult()`` 구현
     * [x] 플레이어 경기 결과 반환 함수 ``returnIsPlayerWin()`` 구현
     * [x] 탈출 조건 
-* [ ] 반복 제어 함수 ``askRetry()`` 구현
+* [x] 반복 제어 함수 ``askRetry()`` 구현
 

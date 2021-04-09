@@ -27,7 +27,13 @@ class BallAvailbilty {
 public class Main {
 
     public static boolean askWillRetry() {
-        return false;
+        System.out.print("게암을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ");
+        Scanner console = new Scanner(System.in);
+        int input = console.nextInt();
+        console.close();
+
+        if (input == 1) return true;
+        else return  false;
     }
 
     public static boolean returnIsPlayerWin (BallAvailbilty ballAvailbilty) {
@@ -99,6 +105,7 @@ public class Main {
 
             if (returnIsPlayerWin(ballAvailbilty)) {
                 System.out.println("3개의 숫자를 모두 맞히셨습니다! 당신의 승리입니다.");
+                console.close();
                 return;
             }
 
@@ -109,6 +116,7 @@ public class Main {
         }
 
         System.out.println("9번의 시도 동안 맞히지 못했습니다! 당신의 패배입니다.");
+        console.close();
         return;
     }
 
