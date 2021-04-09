@@ -8,7 +8,7 @@
     * [ ] 공 판정 함수 ``returnBallAvailability()`` 구현
       * [x] BallAvailibilty DO 생성
       * [x] 정답 생성 및 유효성 판단
-    * [ ] 결과 출력 함수 ``printResult()`` 구현
+    * [x] 결과 출력 함수 ``printResult()`` 구현
     * [ ] 결과 출력 함수 ``returnIsPlayerWin()`` 구현
     * [ ] 탈출 조건 
 * [ ] 반복 제어 함수 ``askRetry()`` 구현
