@@ -17,7 +17,7 @@ public class Main {
     public static void playBaseball(int[] answer) {
         int input;
         StringBuilder hint;
-        System.out.println(answer[0] + "" + answer[1] + "" + answer[2]);
+
         for (int i = 0; i < 9; i++) {
             input = getInput();
             hint = printHint(getHint(input, answer));
@@ -41,11 +41,12 @@ public class Main {
         return input;
     }
 
-    public static void checkInput(int input){
-        if(input<100 || input >999){
+    public static void checkInput(int input) {
+        if (input < 100 || input > 999) {
             getInput();
         }
     }
+
     public static int[] getHint(int input, int[] answer) {
         int[] inputs = new int[3];
         int strike = 0;
