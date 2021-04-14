@@ -37,9 +37,15 @@ public class Main {
         System.out.print("숫자를 입력해주세요 : ");
         Scanner sc = new Scanner(System.in);
         int input = sc.nextInt();
+        checkInput(input);
         return input;
     }
 
+    public static void checkInput(int input){
+        if(input<100 || input >999){
+            getInput();
+        }
+    }
     public static int[] getHint(int input, int[] answer) {
         int[] inputs = new int[3];
         int strike = 0;
