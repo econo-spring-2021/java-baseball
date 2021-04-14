@@ -3,9 +3,9 @@
 ## 기능 목록
 
 
-* [ ] setRandomNum() : 임의의 수 3개 설정하는 메소드
+* [x] setRandomNum() : 임의의 수 3개 설정하는 메소드
 * [ ] playBaseball() : 9번의 숫자야구 게임을 하는 메소드
-  * [ ] getInput() : 입력을 받는 메소드
+  * [x] getInput() : 입력을 받는 메소드
   * [ ] checkInput() : 입력한 숫자가 잘못 되었는지 확인하는 메소드
   * [ ] getHint() : 숫자를 판단하여 힌트를 주는 메소드
   * [ ] printHint() : getHint()에서 얻은 힌트를 출력한다.
