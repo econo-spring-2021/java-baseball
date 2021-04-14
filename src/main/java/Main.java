@@ -3,7 +3,12 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         int[] answer = setRandomNum();
-        playBaseball(answer);
+        boolean replay;
+        do{
+            playBaseball(answer);
+           replay =  askReplay();
+        }while(replay);
+
     }
 
     public static int[] setRandomNum() {
@@ -98,6 +103,20 @@ public class Main {
             sb.append("3 스트라이크 아웃");
         }
         return sb;
+    }
+
+    public static boolean askReplay(){
+        System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+        Scanner sc = new Scanner(System.in);
+        boolean replay = true;
+        int number = sc.nextInt();
+        if(number == 2){
+            replay = false;
+        }else if(number == 1){
+            replay = true;
+        }
+
+        return replay;
     }
 
 }
