@@ -4,10 +4,10 @@ public class Main {
     public static void main(String[] args) {
         int[] answer = setRandomNum();
         boolean replay;
-        do{
+        do {
             playBaseball(answer);
-           replay =  askReplay();
-        }while(replay);
+            replay = askReplay();
+        } while (replay);
 
     }
 
@@ -105,14 +105,14 @@ public class Main {
         return sb;
     }
 
-    public static boolean askReplay(){
+    public static boolean askReplay() {
         System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
         Scanner sc = new Scanner(System.in);
         boolean replay = true;
         int number = sc.nextInt();
-        if(number == 2){
+        if (number == 2) {
             replay = false;
-        }else if(number == 1){
+        } else if (number == 1) {
             replay = true;
         }
 
