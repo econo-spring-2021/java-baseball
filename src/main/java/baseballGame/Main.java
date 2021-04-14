@@ -60,28 +60,38 @@ public class Main {
         }
     }
 
-    public static BallAvailbilty returnBallAvailability(int[] computerBall, int[] playerBall) {
-        int strikeCnt = 0, ballCnt = 0;
-
-        int[] ballCache = new int[10];
+    public static int returnStrikeCntAndMakeBallCache(int[] computerBall, int[] playerBall, int[] ballCache) {
+        int cnt = 0;
         for (int i = 0; i < computerBall.length; i++) {
-            if (computerBall[i] == playerBall[i]) strikeCnt++;
+            if (computerBall[i] == playerBall[i]) cnt++;
             else ballCache[computerBall[i]]++;
         }
 
+        return cnt;
+    }
+
+    public static int returnBallCnt(int[] playerBall, int[] ballCache) {
+        int cnt = 0;
         for (int i = 0; i < playerBall.length; i++) {
             if (ballCache[playerBall[i]] <= 0) continue;
 
-            ballCnt++;
+            cnt++;
             ballCache[playerBall[i]]--;
         }
 
+        return cnt;
+    }
+
+    public static BallAvailbilty returnBallAvailability(int[] computerBall, int[] playerBall) {
+        int[] ballCache = new int[10];
+        int strikeCnt = returnStrikeCntAndMakeBallCache(computerBall, playerBall, ballCache);
+        int ballCnt = returnBallCnt(playerBall, ballCache);
 
         if (strikeCnt == 0 && ballCnt == 0) return new BallAvailbilty(true);
         else return new BallAvailbilty(strikeCnt, ballCnt);
     }
 
-    public static int[] generateComputerBall() {
+    public static int[] returnRandomBall() {
         int[] ball = new int[3];
         for (int i = 0; i < 3; i++) {
             ball[i] = (int) (Math.random() * 10);
@@ -90,18 +100,25 @@ public class Main {
         return ball;
     }
 
-    public static void playGame() {
+    public static int[] returnInputBall() {
         Scanner console = new Scanner(System.in);
-        int[] computerBall = generateComputerBall();
+
+        int input = console.nextInt();
+        int[] inputBall = new int[3];
+        for (int i = 2; i >= 0; i--) {
+            inputBall[i] = input % 10;
+            input /= 10;
+        }
+
+        return inputBall;
+    }
+
+    public static void playGame() {
+        int[] computerBall = returnRandomBall();
 
         for (int cnt = 0; cnt < 9; cnt++) {
             System.out.print("숫자를 입력해주세요 : ");
-            int input = console.nextInt();
-            int[] playerBall = new int[3];
-            for (int i = 2; i >= 0; i--) {
-                playerBall[i] = input % 10;
-                input /= 10;
-            }
+            int[] playerBall = returnInputBall();
 
             BallAvailbilty ballAvailbilty = returnBallAvailability(computerBall, playerBall);
 
@@ -111,15 +128,9 @@ public class Main {
                 System.out.println("3개의 숫자를 모두 맞히셨습니다! 당신의 승리입니다.");
                 return;
             }
-
-            System.out.println("" + computerBall[0] + computerBall[1] + computerBall[2]);
-            System.out.println(ballAvailbilty.getIsBob());
-            System.out.println(ballAvailbilty.getStrikeCnt());
-            System.out.println(ballAvailbilty.getBallCnt());
         }
 
         System.out.println("9번의 시도 동안 맞히지 못했습니다! 당신의 패배입니다.");
-        console.close();
         return;
     }
 
