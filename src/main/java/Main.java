@@ -8,9 +8,7 @@ import java.util.Random;
 
 public class Main {
     static int[] computer_select; // 컴퓨터가 선택한 숫자
-    static int[] user_select; // 사용자가 선택한 숫자
     static boolean[] computer_check; // 컴퓨터가 어떤 숫자 선택했는지 알기 위한 배열
-    static boolean[] user_check; // 사용자가 어떤 숫자 선택했는지 알기 위한 배열 배열
     static int strike_cnt; // 스트라이크 개수
     static int game_cnt=0; // 실행한 게임 횟수
 
@@ -45,10 +43,8 @@ public class Main {
         }
     }
 
-    static void input_user() throws IOException {
+    static void input_user(int[] user_select, boolean[] user_check) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        user_select = new int[3];
-        user_check = new boolean[10];
         String str= br.readLine();
         String[] strings = str.split("");
         for (int i=0; i<user_select.length; i++){
@@ -58,7 +54,7 @@ public class Main {
         }
     }
 
-    static boolean ball_check (boolean[] computer, boolean[] user){
+    static boolean ball_check (boolean[] user_check){
         for (int i=0; i< computer_check.length; i++){
             if(computer_check[i] && user_check[i])
                 return true;
@@ -66,16 +62,16 @@ public class Main {
         return false;
     }
 
-    static void strike_count (int[]computer, int[] user){
+    static void strike_count (int[] user){
        strike_cnt =0;
-       for (int i=0; i<computer.length; i++) {
-           if (computer[i] == user[i])
+       for (int i=0; i<user.length; i++) {
+           if (computer_select[i] == user[i])
                strike_cnt++;
        }
 
     }
 
-    static int ball_count (int[] computer,int[] user){
+    static int ball_count (boolean[] user_check){
         int ball_cnt=0;
         for (int i=0; i<computer_check.length; i++){
             if(computer_check[i] && user_check[i])
@@ -86,11 +82,13 @@ public class Main {
     }
 
     static void play() throws IOException {
+        int []user_select = new int[3];
+        boolean[] user_check = new boolean[10];
         System.out.print(++game_cnt+"번째 숫자를 입력해주세요 : ");
-        input_user(); // 사용자 입력
-        boolean ball_flag = ball_check(computer_check, user_check);
-        strike_count(computer_select, user_select);
-        int ball_cnt = ball_count(computer_select, user_select);
+        input_user(user_select, user_check); // 사용자 입력
+        boolean ball_flag = ball_check(user_check);
+        strike_count(user_select);
+        int ball_cnt = ball_count(user_check);
 
        if(ball_flag && ball_cnt<=0 && strike_cnt<3){
            System.out.println(strike_cnt +" 스트라이크");
@@ -116,9 +114,6 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         input_computer();
-        for (int i=0; i< computer_select.length; i++){
-            System.out.print(computer_select[i]+" ");
-        }
         boolean start = true;
         do{
             play();
