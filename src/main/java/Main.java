@@ -13,10 +13,26 @@ public class Main {
 
     public static int[] setRandomNum() {
         int[] answer = new int[3];
-        for (int i = 0; i < answer.length; i++) {
-            answer[i] = (int) (Math.random() * 10);
-        }
+
+        answer[0] = checkZeroNum();
+
+        do {
+            answer[1] = checkZeroNum();
+        } while (answer[0] == answer[1]);
+
+        do {
+            answer[2] = checkZeroNum();
+        } while (answer[0] == answer[2] || answer[1] == answer[2]);
+
         return answer;
+    }
+
+    public static int checkZeroNum() {
+        int random;
+        do {
+            random = (int) (Math.random() * 10);
+        } while (String.valueOf(random).contains("0"));
+        return random;
     }
 
     public static void playBaseball(int[] answer) {
