@@ -30,14 +30,19 @@ public class Main {
         }
     }
 
-    public static int returnStrikeCntAndMakeBallCache(int[] computerBall, int[] playerBall, int[] ballCache) {
+    public static int returnStrikeCnt(int[] computerBall, int[] playerBall) {
         int cnt = 0;
         for (int i = 0; i < computerBall.length; i++) {
             if (computerBall[i] == playerBall[i]) cnt++;
-            else ballCache[computerBall[i]]++;
         }
-
         return cnt;
+    }
+
+    public static void makeBallCache(int[] computerBall, int[] playerBall, int[] ballCache) {
+        int cnt = 0;
+        for (int i = 0; i < computerBall.length; i++) {
+            if (computerBall[i] != playerBall[i]) ballCache[computerBall[i]]++;
+        }
     }
 
     public static int returnBallCnt(int[] playerBall, int[] ballCache) {
@@ -54,7 +59,8 @@ public class Main {
 
     public static BallAvailability returnBallAvailability(int[] computerBall, int[] playerBall) {
         int[] ballCache = new int[10];
-        int strikeCnt = returnStrikeCntAndMakeBallCache(computerBall, playerBall, ballCache);
+        makeBallCache(computerBall, playerBall, ballCache);
+        int strikeCnt = returnStrikeCnt(computerBall, playerBall);
         int ballCnt = returnBallCnt(playerBall, ballCache);
 
         if (strikeCnt == 0 && ballCnt == 0) return new BallAvailability(true);
