@@ -67,11 +67,24 @@ public class Main {
         else return new BallAvailability(strikeCnt, ballCnt);
     }
 
-    public static int[] returnRandomBall() {
-        int[] ball = new int[3];
+    public static boolean getIsDistinctBall(int[] computerBall, int ball) {
+        boolean isDistinct = true;
         for (int i = 0; i < 3; i++) {
-            ball[i] = (int) (Math.random() * 10);
+            if (computerBall[i] == ball) {
+                isDistinct = false;
+                break;
+            }
         }
+
+        return isDistinct;
+    }
+
+    public static int getRandomBall(int[] computerBall) {
+        int ball;
+        do {
+            Random random = new Random();
+            ball = (int) (random.nextInt(8) + 1);
+        } while (!getIsDistinctBall(computerBall, ball));
 
         return ball;
     }
@@ -90,7 +103,10 @@ public class Main {
     }
 
     public static void playGame() {
-        int[] computerBall = returnRandomBall();
+        int[] computerBall = new int[3];
+        for (int i = 0; i < 3; i++) {
+            computerBall[i] = getRandomBall(computerBall);
+        }
 
         for (int cnt = 0; cnt < 9; cnt++) {
             System.out.print("숫자를 입력해주세요 : ");
