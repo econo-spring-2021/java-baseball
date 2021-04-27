@@ -2,36 +2,6 @@ package baseballGame;
 
 import java.util.*;
 
-class BallAvailbilty {
-    private boolean isBoB;
-    private int strikeCnt;
-    private int ballCnt;
-
-    public BallAvailbilty(boolean isBob) {
-        this.isBoB = isBob;
-        this.strikeCnt = 0;
-        this.ballCnt = 0;
-    }
-
-    public BallAvailbilty(int strikeCnt, int ballCnt) {
-        this.isBoB = false;
-        this.strikeCnt = strikeCnt;
-        this.ballCnt = ballCnt;
-    }
-
-    public boolean getIsBob() {
-        return isBoB;
-    }
-
-    public int getStrikeCnt() {
-        return strikeCnt;
-    }
-
-    public int getBallCnt() {
-        return ballCnt;
-    }
-}
-
 public class Main {
 
     public static boolean askWillRetry() {
@@ -43,12 +13,12 @@ public class Main {
         else return false;
     }
 
-    public static boolean returnIsPlayerWin(BallAvailbilty ballAvailbilty) {
+    public static boolean returnIsPlayerWin(BallAvailability ballAvailbilty) {
         if (ballAvailbilty.getStrikeCnt() == 3) return true;
         else return false;
     }
 
-    public static void printResult(BallAvailbilty ballAvailbilty) {
+    public static void printResult(BallAvailability ballAvailbilty) {
         if (ballAvailbilty.getStrikeCnt() == 3) {
             System.out.println("3 스트라이크 아웃");
         } else if (ballAvailbilty.getIsBob()) {
@@ -82,13 +52,13 @@ public class Main {
         return cnt;
     }
 
-    public static BallAvailbilty returnBallAvailability(int[] computerBall, int[] playerBall) {
+    public static BallAvailability returnBallAvailability(int[] computerBall, int[] playerBall) {
         int[] ballCache = new int[10];
         int strikeCnt = returnStrikeCntAndMakeBallCache(computerBall, playerBall, ballCache);
         int ballCnt = returnBallCnt(playerBall, ballCache);
 
-        if (strikeCnt == 0 && ballCnt == 0) return new BallAvailbilty(true);
-        else return new BallAvailbilty(strikeCnt, ballCnt);
+        if (strikeCnt == 0 && ballCnt == 0) return new BallAvailability(true);
+        else return new BallAvailability(strikeCnt, ballCnt);
     }
 
     public static int[] returnRandomBall() {
@@ -120,7 +90,7 @@ public class Main {
             System.out.print("숫자를 입력해주세요 : ");
             int[] playerBall = returnInputBall();
 
-            BallAvailbilty ballAvailbilty = returnBallAvailability(computerBall, playerBall);
+            BallAvailability ballAvailbilty = returnBallAvailability(computerBall, playerBall);
 
             printResult(ballAvailbilty);
 
