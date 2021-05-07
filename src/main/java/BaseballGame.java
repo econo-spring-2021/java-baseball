@@ -1,65 +1,91 @@
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
-
 import java.util.Scanner;
 import java.util.Random;
 
-public class BaseballGame{
-    public static void main(String[] args){
-        Random createRandom = new Random();
-        int[] baseballNumber = new int[3];
+public class BaseballGame {
+    public static void main(String[] args) {
+        int endNumber = 0;
+        int programCount = 0;
+        Scanner s = new Scanner(System.in);
+        int computerNumber[] = computerNumber();
 
-        for(int i=0; i < 3; i++){
-            int computerNumber = createRandom.nextInt(9);
-            baseballNumber[i] = computerNumber;
-            System.out.println(baseballNumber[i]);
-        }
+        while (endNumber != 2) {
 
-        for(int i = 0; i < 9; i++){
-            Scanner s = new Scanner(System.in);
             System.out.println("숫자를 입력해주세요 : ");
             int userInput = s.nextInt();
+            int strikeCount = judge(computerNumber, userNumber(userInput));
 
-            int indexInput = 0;
-            int[] userNumber = new int[3];
+            programCount += 1;
+            System.out.println(programCount);
 
-            for (int j = 2; j >= 0; j--){
-                indexInput = (int) (userInput%10);
-                userNumber[j] = indexInput;
-                userInput /= 10;
+            if(strikeCount == 3){
+                System.out.println("3개의 숫자를 모두 맞히셨습니다! 당신의 승리입니다.\n");
+                System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n");
+                programCount = 0;
+                computerNumber();
+                endNumber = s.nextInt();
             }
 
-
-
-            judge(baseballNumber, userNumber);
+            if (programCount == 9){
+                System.out.println("9번의 시도 동안 맞히지 못했습니다! 당신의 패배입니다.\n");
+                System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n");
+                programCount = 0;
+                computerNumber();
+                endNumber = s.nextInt();
+            }
         }
-
-        System.out.println("9번의 시도 동안 맞히지 못했습니다! 당신의 패배입니다.\n");
     }
 
-    static void judge(int[] baseballNumber, int[] userNumber){
+    static int judge(int[] computerNumber, int[] userNumber) {
         int strikeCount = 0;
         int ballCount = 0;
 
-        for(int i=0; i <(baseballNumber.length); i++){
-            if(baseballNumber[i] == userNumber[i]){
+        for (int i = 0; i < (computerNumber.length); i++) {
+            if (computerNumber[i] == userNumber[i]) {
                 strikeCount += 1;
-            }
-            else if (baseballNumber[i] != userNumber[i]){
-                int compareNumber = baseballNumber[i];
+            } else if (computerNumber[i] != userNumber[i]) {
+                int compareNumber = computerNumber[i];
                 ballCount += findBall(compareNumber, userNumber);
             }
         }
-        System.out.println("strikeCount : " + strikeCount);
-        System.out.println("ballCount : " + ballCount);
+
+        if (strikeCount == 0 && ballCount==0){
+            System.out.println("볼넷");
+        }
+        else{
+            System.out.println(strikeCount+" 스트라이크" +" , "+ballCount+" 볼");
+        }
+        return strikeCount;
     }
 
-    static int findBall(int compareNumber, int[] userNumber){
+    static int findBall(int compareNumber, int[] userNumber) {
         int sameCount = 0;
-        for(int i = 0; i <userNumber.length; i++){
-            if (compareNumber == userNumber[i]){
-                 sameCount += 1;
+        for (int i = 0; i < userNumber.length; i++) {
+            if (compareNumber == userNumber[i]) {
+                sameCount += 1;
             }
         }
         return sameCount;
+    }
+
+    static int[] userNumber(int userInput) {
+        int[] userNumber = new int[3];
+
+        userNumber[0] = userInput/100;
+        userNumber[1] = userInput%100/10;
+        userNumber[2] = userInput%10;
+
+        return userNumber;
+    }
+
+    static int[] computerNumber() {
+        Random createRandom = new Random();
+        int[] baseballNumber = new int[3];
+
+        for (int i = 0; i < 3; i++) {
+            int computerNumber = createRandom.nextInt(9);
+            baseballNumber[i] = computerNumber;
+            System.out.println("baseball"+baseballNumber[i]);
+        }
+        return baseballNumber;
     }
 }
