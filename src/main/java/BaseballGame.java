@@ -84,7 +84,6 @@ public class BaseballGame {
         for (int i = 0; i < 3; i++) {
             int computerNumber = createRandom.nextInt(9);
             baseballNumber[i] = computerNumber;
-            System.out.println("baseball"+baseballNumber[i]);
         }
         return baseballNumber;
     }
