@@ -62,7 +62,7 @@ public class Main {
         return false;
     }
 
-    static void strike_count (int[] user){
+    static void strike_num_counting (int[] user){
        strike_cnt =0;
        for (int i=0; i<user.length; i++) {
            if (computer_select[i] == user[i])
@@ -71,7 +71,7 @@ public class Main {
 
     }
 
-    static int ball_count (boolean[] user_check){
+    static int ball_num_counting (boolean[] user_check){
         int ball_cnt=0;
         for (int i=0; i<computer_check.length; i++){
             if(computer_check[i] && user_check[i])
@@ -87,8 +87,8 @@ public class Main {
         System.out.print(++game_cnt+"번째 숫자를 입력해주세요 : ");
         input_user(user_select, user_check); // 사용자 입력
         boolean ball_flag = ball_check(user_check);
-        strike_count(user_select);
-        int ball_cnt = ball_count(user_check);
+        strike_num_counting(user_select);
+        int ball_cnt = ball_num_counting(user_check);
 
        if(ball_flag && ball_cnt<=0 && strike_cnt<3){
            System.out.println(strike_cnt +" 스트라이크");
