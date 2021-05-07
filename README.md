@@ -104,3 +104,8 @@
 
 
 * 책임과 기능을 분리하는 연습을 해보자!
+
+
+### Refactor
+* Computer 클래스 static 메서드로 만들어 Utility 메서드로 사용
+* OutputView 추가
