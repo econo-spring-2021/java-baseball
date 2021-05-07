@@ -1,3 +1,5 @@
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
+
 import java.util.Scanner;
 import java.util.Random;
 
@@ -35,10 +37,29 @@ public class BaseballGame{
     }
 
     static void judge(int[] baseballNumber, int[] userNumber){
+        int strikeCount = 0;
+        int ballCount = 0;
+
         for(int i=0; i <(baseballNumber.length); i++){
             if(baseballNumber[i] == userNumber[i]){
-                System.out.println("3개의 숫자를 모두 맞히셨습니다! 당신의 승리입니다.\n");
+                strikeCount += 1;
+            }
+            else if (baseballNumber[i] != userNumber[i]){
+                int compareNumber = baseballNumber[i];
+                ballCount += findBall(compareNumber, userNumber);
             }
         }
+        System.out.println("strikeCount : " + strikeCount);
+        System.out.println("ballCount : " + ballCount);
+    }
+
+    static int findBall(int compareNumber, int[] userNumber){
+        int sameCount = 0;
+        for(int i = 0; i <userNumber.length; i++){
+            if (compareNumber == userNumber[i]){
+                 sameCount += 1;
+            }
+        }
+        return sameCount;
     }
 }
