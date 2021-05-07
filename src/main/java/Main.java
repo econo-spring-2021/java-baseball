@@ -81,9 +81,7 @@ public class Main {
         return ball_cnt;
     }
 
-    static void play() throws IOException {
-        int []user_select = new int[3];
-        boolean[] user_check = new boolean[10];
+    static void play(int []user_select, boolean[] user_check) throws IOException {
         System.out.print(++game_cnt+"번째 숫자를 입력해주세요 : ");
         input_user(user_select, user_check); // 사용자 입력
         boolean ball_flag = ball_check(user_check);
@@ -116,7 +114,9 @@ public class Main {
         input_computer();
         boolean start = true;
         do{
-            play();
+            int []user_select = new int[3];
+            boolean[] user_check = new boolean[10];
+            play(user_select, user_check);
             if(game_cnt>=9) start =init();
             if(strike_cnt >=3) start = init();
         }
