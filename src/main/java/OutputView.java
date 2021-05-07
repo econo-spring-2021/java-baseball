@@ -14,4 +14,12 @@ public class OutputView {
     public void showFourBallResult() {
         System.out.println("볼넷");
     }
+
+    public void showFailureMessage() {
+        System.out.println(Constants.MESSAGE_FAILURE);
+    }
+
+    public void showVictoryMessage() {
+        System.out.println(Constants.MESSAGE_VICTORY);
+    }
 }

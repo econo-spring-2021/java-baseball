@@ -7,17 +7,15 @@ public class Game {
 
     private InputView inputView;
     private OutputView outputView;
-    private Computer computer;
 
     public Game() {
         inputCount = 0;
         inputView = new InputView();
         outputView = new OutputView();
-        computer = new Computer();
     }
 
     public void play(Scanner scanner) {
-        String computerNumber = computer.generateRandomNumber();
+        String computerNumber = Computer.generateRandomNumber();
         //System.out.println(computerNumber);
 
         while(inputCount != Constants.NUMBER_OF_ATTEMPT) {
@@ -27,13 +25,13 @@ public class Game {
             }
             BaseballScore baseballScore = compareInputNumberWithComputerNumber(computerNumber, inputView.getInputNumber());
             if(inputCount == Constants.NUMBER_OF_ATTEMPT) {
-                System.out.println(Constants.MESSAGE_FAILURE);
+                outputView.showFailureMessage();
             }
 
             if(baseballScore.strike != 3) {
                 printHint(baseballScore);
             } else {
-                System.out.println(Constants.MESSAGE_VICTORY);
+                outputView.showVictoryMessage();
                 break;
             }
 
