@@ -12,25 +12,24 @@ public class BaseballGame {
 
             System.out.println("숫자를 입력해주세요 : ");
             int userInput = s.nextInt();
-            int strikeCount = judge(computerNumber, userNumber(userInput));
+            int strikeCount = judge(computerNumber, parseUserNumber(userInput));
 
             programCount += 1;
-            System.out.println(programCount);
 
             if(strikeCount == 3){
                 System.out.println("3개의 숫자를 모두 맞히셨습니다! 당신의 승리입니다.\n");
                 System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n");
-                programCount = 0;
-                computerNumber();
                 endNumber = s.nextInt();
+                programCount = 0;
+                computerNumber = computerNumber();
             }
 
             if (programCount == 9){
                 System.out.println("9번의 시도 동안 맞히지 못했습니다! 당신의 패배입니다.\n");
                 System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n");
-                programCount = 0;
-                computerNumber();
                 endNumber = s.nextInt();
+                programCount = 0;
+                computerNumber = computerNumber();
             }
         }
     }
@@ -51,9 +50,30 @@ public class BaseballGame {
         if (strikeCount == 0 && ballCount==0){
             System.out.println("볼넷");
         }
-        else{
-            System.out.println(strikeCount+" 스트라이크" +" , "+ballCount+" 볼");
+
+        else if (strikeCount != 0 && ballCount == 0){
+            StringBuilder strike = new StringBuilder();
+            strike.append(strikeCount);
+            strike.append(" 스트라이크");
+            System.out.println(strike);
         }
+
+        else if (strikeCount == 0 && ballCount != 0){
+            StringBuilder ball = new StringBuilder();
+            ball.append(ball);
+            ball.append(" 볼");
+            System.out.println(ball);
+        }
+        else{
+            StringBuilder stringResult = new StringBuilder();
+            stringResult.append(strikeCount);
+            stringResult.append(" 스트라이크");
+            stringResult.append(ballCount);
+            stringResult.append(" 볼");
+        }
+
+        System.out.println("스트라이크 : "+strikeCount+", 볼 : "+ballCount);
+
         return strikeCount;
     }
 
@@ -67,7 +87,7 @@ public class BaseballGame {
         return sameCount;
     }
 
-    static int[] userNumber(int userInput) {
+    static int[] parseUserNumber(int userInput) {
         int[] userNumber = new int[3];
 
         userNumber[0] = userInput/100;
@@ -78,13 +98,24 @@ public class BaseballGame {
     }
 
     static int[] computerNumber() {
-        Random createRandom = new Random();
+        int max=9;
+
         int[] baseballNumber = new int[3];
+        Random createRandom = new Random();
 
         for (int i = 0; i < 3; i++) {
-            int computerNumber = createRandom.nextInt(9);
-            baseballNumber[i] = computerNumber;
+            int computerNumber = createRandom.nextInt(max);
+            baseballNumber[i] += computerNumber;
+            for(int j=0; j <i; j++)
+            {
+                if (baseballNumber[i] == baseballNumber[j]){
+                    i--;
+                }
+            }
         }
+        System.out.println(baseballNumber[0]);
+        System.out.println(baseballNumber[1]);
+        System.out.println(baseballNumber[2]);
         return baseballNumber;
     }
 }
