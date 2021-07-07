@@ -98,24 +98,24 @@ public class BaseballGame {
     }
 
     static int[] computerNumber() {
-        int max=9;
-
         int[] baseballNumber = new int[3];
-        Random createRandom = new Random();
 
-        for (int i = 0; i < 3; i++) {
-            int computerNumber = createRandom.nextInt(max);
-            baseballNumber[i] += computerNumber;
-            for(int j=0; j <i; j++)
-            {
-                if (baseballNumber[i] == baseballNumber[j]){
-                    i--;
-                }
-            }
-        }
-        System.out.println(baseballNumber[0]);
-        System.out.println(baseballNumber[1]);
-        System.out.println(baseballNumber[2]);
+        baseballNumber[0] = randomNumber();
+        do {
+            baseballNumber[1] = randomNumber();
+        }while (baseballNumber[0] == baseballNumber[1]);
+
+        do {
+            baseballNumber[2] = randomNumber();
+        }while (baseballNumber[0] == baseballNumber[1] || baseballNumber[1] == baseballNumber[2]);
+
         return baseballNumber;
+    }
+
+    static int randomNumber(){
+        int randomNumber;
+        Random createRandom = new Random();
+        randomNumber = createRandom.nextInt(9);
+        return randomNumber;
     }
 }
