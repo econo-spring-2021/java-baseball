@@ -98,7 +98,11 @@ public class BaseballGame {
     }
 
     static int[] computerNumber() {
+
+        int max=9;
+
         int[] baseballNumber = new int[3];
+        Random createRandom = new Random();
 
         baseballNumber[0] = randomNumber();
         do {
